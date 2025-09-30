@@ -1,6 +1,60 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 
+
+function Task({ task, tasks, setTasks }) {
+
+  const [edit, setEdit] = useState(false);
+  const [input, setInput] = useState(task.text);
+
+  // Change the task to be completed or not
+  function handleClick() {
+    const newTasks = tasks.map(item => {
+      if (item.id === task.id) return {...item, completed: !item.completed};
+      return item;
+    })
+    setTasks(newTasks);
+  }
+
+  function handleEdit(e){
+    e.stopPropagation();
+    setEdit(!edit);
+  }
+
+  function handleInput(e) {
+    setInput(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newTasks = tasks.map(item => {
+      if (item.id === task.id) return {...item, text: input};
+      return item;
+    })
+    setTasks(newTasks);
+    setEdit(false);
+  }
+
+
+  if (!edit) return (
+    <li id={ task.id } onClick={ handleClick }>
+      <div  className={ `circle ${task.completed && 'completed'}` }></div>
+      <div className={ `task ${task.completed && 'completed'}` }>{ task.text }</div>
+      <button onClick={ handleEdit }>Edit</button>
+    </li>
+  )
+
+  if (edit) return (
+    <li>
+      <form onSubmit={ handleSubmit }>
+        <input type="text" name='text' value={ input } onChange={ handleInput }/>
+        <button type="submit">Save</button>
+        <button type="button" onClick={ handleEdit }>Cancel</button>
+      </form>
+    </li>
+  )
+}
+
 function Tasks() {
 
   const [tasks, setTasks] = useState(null);
@@ -27,17 +81,6 @@ function Tasks() {
     getTasks();
   }, []);
   
-  // Get the task name and change the task to be completed or not
-  function handleClick(e) {
-    const clicked = e.target.lastElementChild.innerHTML;
-    const newTasks = tasks.map(task => {
-      if (task.text === clicked) task.completed = !task.completed;
-      return task;
-    });
-    setTasks(newTasks);
-  }
-
-  
   return (
     <>
       { isLoading && <h3>Loading...</h3> }
@@ -46,10 +89,7 @@ function Tasks() {
       { tasks &&
         <ul className='tasklist'>
           { tasks.map(task => ( 
-            <li key={ task.id } onClick={ handleClick }>
-              <div className={ `circle ${task.completed && 'completed'}` }></div>
-              <div className={ `task ${task.completed && 'completed'}` }>{ task.text }</div>
-            </li>
+            <Task key={task.id} task={ task } tasks={ tasks} setTasks={ setTasks } />
           ))}
         </ul>
       }

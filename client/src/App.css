@@ -27,3 +27,50 @@ header {
     padding: 50px;
     border: 1px solid black;
 }
+
+.tasklist {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px;
+    padding: 0px;
+}
+
+.tasklist li {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.tasklist li:hover {
+    cursor: pointer;
+}
+
+.task.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.circle.completed {
+    background-color: green;
+}
+
+.circle.completed::after {
+    content: '✔';
+    color: white;
+    position: relative;
+    left: 3px;
+    bottom: 3px;
+}

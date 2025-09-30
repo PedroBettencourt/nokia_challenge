@@ -7,6 +7,7 @@ function Tasks() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Fetch task data
   useEffect(() => {
     async function getTasks() {
       setIsLoading(true);
@@ -25,9 +26,10 @@ function Tasks() {
 
     getTasks();
   }, []);
-
+  
+  // Get the task name and change the task to be completed or not
   function handleClick(e) {
-    const clicked = e.target.innerHTML;
+    const clicked = e.target.lastElementChild.innerHTML;
     const newTasks = tasks.map(task => {
       if (task.text === clicked) task.completed = !task.completed;
       return task;
@@ -42,11 +44,11 @@ function Tasks() {
       { error && <h3>Error</h3> }
 
       { tasks &&
-        <ul className='tasks'>
-          { console.log(tasks) }
+        <ul className='tasklist'>
           { tasks.map(task => ( 
-            <li key={ task.id } className={ `${task.completed && 'completed'}` } onClick={ handleClick }>
-              { task.text }
+            <li key={ task.id } onClick={ handleClick }>
+              <div className={ `circle ${task.completed && 'completed'}` }></div>
+              <div className={ `task ${task.completed && 'completed'}` }>{ task.text }</div>
             </li>
           ))}
         </ul>

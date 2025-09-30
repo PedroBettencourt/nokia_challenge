@@ -26,16 +26,28 @@ function Tasks() {
     getTasks();
   }, []);
 
+  function handleClick(e) {
+    const clicked = e.target.innerHTML;
+    const newTasks = tasks.map(task => {
+      if (task.text === clicked) task.completed = !task.completed;
+      return task;
+    });
+    setTasks(newTasks);
+  }
+
   
   return (
     <>
       { isLoading && <h3>Loading...</h3> }
       { error && <h3>Error</h3> }
-      
+
       { tasks &&
-        <ul>
+        <ul className='tasks'>
+          { console.log(tasks) }
           { tasks.map(task => ( 
-            <li key={ task.id }>{ task.text }</li>
+            <li key={ task.id } className={ `${task.completed && 'completed'}` } onClick={ handleClick }>
+              { task.text }
+            </li>
           ))}
         </ul>
       }

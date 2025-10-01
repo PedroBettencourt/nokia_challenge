@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./Tasks.css";
+import { tasklist, items, taskItem, circle, completed } from "./Tasks.module.css";
 
 function Task({ task, tasks, setTasks }) {
   const [edit, setEdit] = useState(false);
@@ -35,9 +35,9 @@ function Task({ task, tasks, setTasks }) {
 
   if (!edit)
     return (
-      <li id={task.id} onClick={handleClick} className="items">
-        <div className={`circle ${task.completed && "completed"}`}></div>
-        <div className={`task ${task.completed && "completed"}`}>
+      <li id={task.id} onClick={handleClick} className={items}>
+        <div className={`${circle} ${task.completed && completed}`}></div>
+        <div className={`${taskItem} ${task.completed && completed}`}>
           {task.text}
         </div>
         <button onClick={handleEdit}>Edit</button>
@@ -47,9 +47,9 @@ function Task({ task, tasks, setTasks }) {
   if (edit)
     return (
       <li>
-        <form onSubmit={handleSubmit} className="items">
+        <form onSubmit={handleSubmit} className={items}>
           <input
-            className="task"
+            className={taskItem}
             type="text"
             name="text"
             value={input}
@@ -91,11 +91,12 @@ function Tasks() {
 
   return (
     <>
+      <h2>Tasks</h2>
       {isLoading && <h3>Loading...</h3>}
       {error && <h3>Error</h3>}
 
       {tasks && (
-        <ul className="tasklist">
+        <ul className={tasklist}>
           {tasks.map((task) => (
             <Task key={task.id} task={task} tasks={tasks} setTasks={setTasks} />
           ))}

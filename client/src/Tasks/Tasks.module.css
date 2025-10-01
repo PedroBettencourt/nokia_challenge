@@ -1,40 +1,10 @@
-header {
-    text-align: center;
-}
-
-.main {
-    display: flex;
-}
-
-.main nav {
-    width: 200px;
-    text-align: center;
-    border: 1px solid black;
-}
-
-.main nav h2 {
-    margin: 0;
-    padding: 10px;
-    border: 1px solid black;
-}
-
-.main nav h2:hover {
-    cursor: pointer;
-}
-
-.main section {
-    flex: 1;
-    padding: 50px;
-    border: 1px solid black;
-}
-
 .tasklist {
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin: 20px;
-    padding: 0px;
+    margin: 5px;
+    padding: 0;
 }
 
 .tasklist li {
@@ -57,11 +27,11 @@ header {
     font-size: 1.1rem;
 }
 
-.task {
+.taskItem {
     flex: 1;
 }
 
-.task.completed {
+.taskItem.completed {
     text-decoration: line-through;
     color: gray;
 }

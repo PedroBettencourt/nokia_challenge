@@ -1,0 +1,38 @@
+header {
+    text-align: center;
+}
+
+.content {
+    display: flex;
+}
+
+nav {
+    width: 200px;
+    text-align: center;
+    outline: 1px solid black;
+}
+
+nav h2 {
+    margin: 0;
+    padding: 10px;
+    outline: 1px solid black;
+}
+
+nav h2:hover {
+    cursor: pointer;
+}
+
+main {
+    flex: 1;
+    padding: 50px;
+    outline: 1px solid black;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: gray;
+}

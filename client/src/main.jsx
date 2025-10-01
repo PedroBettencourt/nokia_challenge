@@ -2,10 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css'
-import Layout from './Layout.jsx'
+import Layout from './Layout/Layout.jsx'
 import Errorpage from './Errorpage.jsx'
 import Homepage from './Homepage.jsx'
-import Tasks from './Tasks.jsx'
+import Tasks from './Tasks/Tasks.jsx'
 
 const router = createBrowserRouter([
   {

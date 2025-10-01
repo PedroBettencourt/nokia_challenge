@@ -37,7 +37,7 @@ function Task({ task, tasks, setTasks }) {
 
 
   if (!edit) return (
-    <li id={ task.id } onClick={ handleClick }>
+    <li id={ task.id } onClick={ handleClick } className='items'>
       <div  className={ `circle ${task.completed && 'completed'}` }></div>
       <div className={ `task ${task.completed && 'completed'}` }>{ task.text }</div>
       <button onClick={ handleEdit }>Edit</button>
@@ -46,8 +46,8 @@ function Task({ task, tasks, setTasks }) {
 
   if (edit) return (
     <li>
-      <form onSubmit={ handleSubmit }>
-        <input type="text" name='text' value={ input } onChange={ handleInput }/>
+      <form onSubmit={ handleSubmit } className='items'>
+        <input className='task' type="text" name='text' value={ input } onChange={ handleInput }/>
         <button type="submit">Save</button>
         <button type="button" onClick={ handleEdit }>Cancel</button>
       </form>

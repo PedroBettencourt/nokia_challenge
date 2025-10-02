@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { tasklist, items, taskItem, circle, completed } from "./Tasks.module.css";
+import {
+  tasklist,
+  items,
+  taskItem,
+  circle,
+  completed,
+} from "./Tasks.module.css";
 
 function Task({ task, tasks, setTasks }) {
   const [edit, setEdit] = useState(false);
@@ -33,14 +39,22 @@ function Task({ task, tasks, setTasks }) {
     setEdit(false);
   }
 
+  function handleDelete(e) {
+    e.stopPropagation();
+
+    const newTasks = tasks.filter((item) => item.id !== task.id);
+    setTasks(newTasks);
+  }
+
   if (!edit)
     return (
-      <li id={task.id} onClick={handleClick} className={items}>
+      <li onClick={handleClick} className={items}>
         <div className={`${circle} ${task.completed && completed}`}></div>
         <div className={`${taskItem} ${task.completed && completed}`}>
           {task.text}
         </div>
         <button onClick={handleEdit}>Edit</button>
+        <button onClick={handleDelete}>Delete</button>
       </li>
     );
 

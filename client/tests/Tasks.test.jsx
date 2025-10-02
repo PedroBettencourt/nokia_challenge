@@ -89,4 +89,14 @@ describe("Tasks", () => {
 
     expect(screen.getByText("Task Test - changed")).toBeInTheDocument();
   });
+
+  it("deletes task", async () => {
+    await rendersTasks();
+
+    const dltButton = screen.getAllByRole("button", { name: "Delete" })[0];
+    const user = userEvent.setup();
+    await user.click(dltButton);
+
+    expect(screen.queryByText("Task Test")).not.toBeInTheDocument();
+  });
 });
